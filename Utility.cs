@@ -39,6 +39,7 @@ namespace RandomCardAttribute
                 cost = Plugin.configRandomizeAllCost.Value || costType == 0 ? UnityEngine.Random.RandomRangeInt(Plugin.configMinCost.Value, Plugin.configMaxCost.Value) : 0,
                 bonesCost = Plugin.configRandomizeAllCost.Value || costType == 1 ? UnityEngine.Random.RandomRangeInt(Plugin.configMinCost.Value, Plugin.configMaxCost.Value) : 0,
                 energyCost = Plugin.configRandomizeAllCost.Value || costType == 2 ? UnityEngine.Random.RandomRangeInt(Plugin.configMinCost.Value, Plugin.configMaxCost.Value) : 0,
+                // abilities = randomAbilityList(),
             }.AdjustCard(cardInfo);
         }
     }
