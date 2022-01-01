@@ -9,7 +9,7 @@ namespace RandomCardAttribute
         [HarmonyPrefix]
         public static void Prefix(ref CardInfo __0)
         {
-            if (!Plugin.configRandomizeOpponentCard.Value) return;
+            if (!Plugin.configuration.behaviour.card.randomizeOpponentCard.Value) return;
             CardInfo cardInfo = __0;
             __0 = Utility.randomCardInfo(cardInfo);
         }

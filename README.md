@@ -1,6 +1,6 @@
 # RandomCardAttribute
 
-A mod for Inscryption where it randomize your card on battle.
+A mod for Inscryption where it randomize your card's attribute on battle.
 
 ## Installation (game, automated)
 
@@ -28,9 +28,14 @@ You can configurate the behaviour of this mod by doing the following
 
 ## TODO
 
-|                Task                 | Status |                     Note                      |
-| :---------------------------------: | :----: | :-------------------------------------------: |
-| Randomize Ability / Special Ability |  null  | Please send help, I don't know how to do this |
+|                   Task                    | Status |                        Note                         |
+| :---------------------------------------: | :----: | :-------------------------------------------------: |
+| Test if ability work with Act 2 and Act 3 |  SOON  | Need someone to send over Act 2 and Act 3 save file |
+|        More detailed configuration        |  SOON  |                                                     |
+
+## Changelog
+
+- [Here](https://github.com/xhayper/RandomCardAttribute/blob/master/CHANGELOG.md)
 
 ## Credits
 
