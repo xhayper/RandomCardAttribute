@@ -6,6 +6,10 @@ namespace RandomCardAttribute
     {
         public class Behaviour
         {
+            public ConfigEntry<bool> randomizeInActTwo;
+
+            public ConfigEntry<bool> randomizeInActThree;
+
             public class Card
             {
                 public ConfigEntry<bool> randomizeOpponentCard;
@@ -13,6 +17,8 @@ namespace RandomCardAttribute
                 public ConfigEntry<bool> randomizePlayerCard;
 
                 public ConfigEntry<bool> randomizeSquirrelCard;
+
+                public ConfigEntry<bool> randomizeCorrectCost;
 
                 public ConfigEntry<bool> randomizeBoneCost;
 
@@ -58,8 +64,9 @@ namespace RandomCardAttribute
                     randomizeOpponentCard = Config.Bind(prefix, "randomizeOpponentCard", true);
                     randomizePlayerCard = Config.Bind(prefix, "randomizePlayerCard", true);
                     randomizeSquirrelCard = Config.Bind(prefix, "randomizeSquirrelCard", false);
+                    randomizeCorrectCost = Config.Bind(prefix, "randomizeCorrectCost", true);
                     randomizeBoneCost = Config.Bind(prefix, "randomizeBoneCost", false);
-                    randomizeBloodCost = Config.Bind(prefix, "randomizeBloodCost", true);
+                    randomizeBloodCost = Config.Bind(prefix, "randomizeBloodCost", false);
                     randomizeEnegryCost = Config.Bind(prefix, "randomizeEnegryCost", false);
 
                     modification = new Modification();
@@ -71,6 +78,12 @@ namespace RandomCardAttribute
 
             public void bind(ConfigFile Config)
             {
+                string prefix = "Behaviour";
+
+                randomizeInActTwo = Config.Bind(prefix, "randomizeInActTwo", false);
+
+                randomizeInActThree = Config.Bind(prefix, "randomizeInActThree", false);
+
                 card = new Card();
                 card.bind(Config);
             }
@@ -126,7 +139,7 @@ namespace RandomCardAttribute
                     minHealth = Config.Bind(prefix, "minHealth", 1);
                     maxHealth = Config.Bind(prefix, "maxHealth", 9);
                     minCost = Config.Bind(prefix, "minCost", 0);
-                    maxCost = Config.Bind(prefix, "maxCost", 3);
+                    maxCost = Config.Bind(prefix, "maxCost", 5);
 
                     modification.bind(Config);
                 }

@@ -37,15 +37,17 @@ namespace RandomCardAttribute
 
         public static CardInfo randomCardInfo(CardInfo cardInfo, bool isOpponent = false)
         {
+
             Plugin.Log.LogDebug($"Randomizing card: {cardInfo.name}");
             if (!Plugin.configuration.behaviour.card.randomizeSquirrelCard.Value && cardInfo.name == "Squirrel") return cardInfo;
+            int costType = UnityEngine.Random.RandomRangeInt(0, 2);
             CustomCard customCard = new CustomCard(cardInfo.name)
             {
                 baseAttack = UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minAttack.Value, Plugin.configuration.range.card.maxAttack.Value),
                 baseHealth = UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minHealth.Value, Plugin.configuration.range.card.maxHealth.Value),
-                cost = Plugin.configuration.behaviour.card.randomizeBloodCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : 0,
-                bonesCost = Plugin.configuration.behaviour.card.randomizeBoneCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : 0,
-                energyCost = Plugin.configuration.behaviour.card.randomizeEnegryCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : 0,
+                cost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 0 && (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2)) || Plugin.configuration.behaviour.card.randomizeBloodCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.BloodCost,
+                bonesCost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 1 && (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2)) || Plugin.configuration.behaviour.card.randomizeBoneCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.BonesCost,
+                energyCost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 2 && (SaveManager.SaveFile.IsPart2 || SaveManager.SaveFile.IsPart3)) || Plugin.configuration.behaviour.card.randomizeEnegryCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.EnergyCost,
             };
             if (Plugin.configuration.behaviour.card.modification.randomizeSpecialAbility.Value && UnityEngine.Random.RandomRangeInt(0, 1) == 1) customCard.specialAbilities = new List<SpecialTriggeredAbility>() { randomSpecialTriggeredAbility() };
             CardInfo newCardInfo = customCard.AdjustCard(cardInfo);
@@ -65,7 +67,7 @@ namespace RandomCardAttribute
                     abilities = { Utility.randomAbility() },
                 });
             }
-            if (!isOpponent)
+            if (!isOpponent && SaveManager.SaveFile.IsPart1)
             {
                 for (int i = 0; i < UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.modification.minCustomAbility.Value, Plugin.configuration.range.card.modification.maxCustomAbility.Value + 1); i++)
                 {
