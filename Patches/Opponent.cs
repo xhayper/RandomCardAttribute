@@ -11,7 +11,7 @@ namespace RandomCardAttribute
         {
             if (!Plugin.configuration.behaviour.card.randomizeOpponentCard.Value) return;
             CardInfo cardInfo = __0;
-            __0 = Utility.randomCardInfo(cardInfo);
+            __0 = Utility.randomCardInfo(cardInfo, true);
         }
     }
 }
