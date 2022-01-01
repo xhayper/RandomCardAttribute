@@ -10,11 +10,21 @@ namespace RandomCardAttribute
     public class PlayerHand_AddCardToHand
     {
         [HarmonyPrefix]
-        public static void Prefix(PlayableCard __0)
+        public static void Prefix(ref PlayableCard __0)
         {
-            if (!Plugin.configRandomizePlayerCard.Value) return;
-            CardInfo cardInfo = __0.Info;
-            __0.Info = Utility.randomCardInfo(cardInfo);
+            if (!Plugin.configuration.behaviour.card.randomizePlayerCard.Value) return;
+            PlayableCard playableCard = __0;
+            if (!Plugin.configuration.behaviour.card.randomizeSquirrelCard.Value && __0.Info.name == "Squirrel") return;
+            playableCard.Info.Abilities.ForEach((ability) =>
+            {
+                playableCard.TriggerHandler.RemoveAbility(ability);
+            });
+            playableCard.TemporaryMods.Clear();
+            playableCard.Info = Utility.randomCardInfo(playableCard.Info);
+            playableCard.Info.Abilities.ForEach((ability) =>
+            {
+                playableCard.TriggerHandler.AddAbility(ability);
+            });
         }
     }
 }
