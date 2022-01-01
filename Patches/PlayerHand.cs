@@ -12,6 +12,8 @@ namespace RandomCardAttribute
         [HarmonyPrefix]
         public static void Prefix(ref PlayableCard __0)
         {
+            if (SaveManager.SaveFile.IsPart2 && !Plugin.configuration.behaviour.randomizeInActTwo.Value) return;
+            if (SaveManager.SaveFile.IsPart3 && !Plugin.configuration.behaviour.randomizeInActThree.Value) return;
             if (!Plugin.configuration.behaviour.card.randomizePlayerCard.Value) return;
             PlayableCard playableCard = __0;
             if (!Plugin.configuration.behaviour.card.randomizeSquirrelCard.Value && __0.Info.name == "Squirrel") return;

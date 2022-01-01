@@ -13,7 +13,7 @@ namespace RandomCardAttribute
     {
         private const string PluginGuid = "io.github.xhayper.randomcardattribute";
         private const string PluginName = "RandomCardAttribute";
-        private const string PluginVersion = "1.1.0.0";
+        private const string PluginVersion = "1.1.1.0";
 
         internal static ManualLogSource Log;
 
