@@ -35,7 +35,7 @@ You can configurate the behaviour of this mod by doing the following
 
 ## Changelog
 
-- [Here](https://github.com/xhayper/RandomCardAttribute/blob/master/CHANGELOG.md)
+- [Here](https://github.com/xhayper/RandomCardAttribute/blob/main/CHANGELOG.md)
 
 ## Credits
 
