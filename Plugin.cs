@@ -6,9 +6,8 @@ using HarmonyLib;
 
 namespace RandomCardAttribute
 {
-
     [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
-    [BepInDependency("cyantist.inscryption.api", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("cyantist.inscryption.api")]
     public class Plugin : BaseUnityPlugin
     {
         private const string PluginGuid = "io.github.xhayper.randomcardattribute";
@@ -17,16 +16,15 @@ namespace RandomCardAttribute
 
         internal static ManualLogSource Log;
 
-        internal static Configuration configuration;
+        internal static Configuration Configuration;
 
         private void Awake()
         {
-
-            Plugin.Log = base.Logger;
+            Log = Logger;
             Log.LogInfo($"Oh boy, You made a huge mistake.");
-            configuration = new Configuration();
-            configuration.bind(Config);
-            Harmony harmony = new Harmony(PluginGuid);
+            Configuration = new Configuration();
+            Configuration.Bind(Config);
+            var harmony = new Harmony(PluginGuid);
             harmony.PatchAll();
         }
     }

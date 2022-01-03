@@ -1,3 +1,5 @@
+production/
+vscode/
+.idea/
 obj/
 bin/
-production/
