@@ -4,166 +4,164 @@ namespace RandomCardAttribute
 {
     public class Configuration
     {
-        public class Behaviour
+        public class BehaviourConfig
         {
-            public ConfigEntry<bool> randomizeInActTwo;
+            public ConfigEntry<bool> RandomizeInActTwo;
 
-            public ConfigEntry<bool> randomizeInActThree;
+            public ConfigEntry<bool> RandomizeInActThree;
 
-            public class Card
+            public class CardConfig
             {
-                public ConfigEntry<bool> randomizeOpponentCard;
+                public ConfigEntry<bool> RandomizeOpponentCard;
 
-                public ConfigEntry<bool> randomizePlayerCard;
+                public ConfigEntry<bool> RandomizePlayerCard;
 
-                public ConfigEntry<bool> randomizeSquirrelCard;
+                public ConfigEntry<bool> RandomizeSquirrelCard;
 
-                public ConfigEntry<bool> randomizeCorrectCost;
+                public ConfigEntry<bool> RandomizeCorrectCost;
 
-                public ConfigEntry<bool> randomizeBoneCost;
+                public ConfigEntry<bool> RandomizeBoneCost;
 
-                public ConfigEntry<bool> randomizeBloodCost;
+                public ConfigEntry<bool> RandomizeBloodCost;
 
-                public ConfigEntry<bool> randomizeEnegryCost;
+                public ConfigEntry<bool> RandomizeEnergyCost;
 
-                public class Modification
+                public class ModificationConfig
                 {
+                    public ConfigEntry<bool> RandomizeSpecialAbility;
 
-                    public ConfigEntry<bool> randomizeSpecialAbility;
+                    public ConfigEntry<bool> KeepTotemModification;
 
-                    public ConfigEntry<bool> keepTotemModification;
+                    public ConfigEntry<bool> KeepLatchModification;
 
-                    public ConfigEntry<bool> keepLatchModification;
+                    public ConfigEntry<bool> KeepOverclockModification;
 
-                    public ConfigEntry<bool> keepOverclockModification;
+                    public ConfigEntry<bool> KeepMergeModification;
 
+                    public ConfigEntry<bool> KeepDuplicateModification;
 
-                    public ConfigEntry<bool> keepMergeModification;
-
-                    public ConfigEntry<bool> keepDuplicateModification;
-
-                    public void bind(ConfigFile Config)
+                    public void Bind(ConfigFile config)
                     {
-                        string prefix = "Behaviour.Card.Modification";
+                        const string prefix = "Behaviour.Card.Modification";
 
-                        randomizeSpecialAbility = Config.Bind(prefix, "randomizeSpecialAbility", true);
-                        keepTotemModification = Config.Bind(prefix, "keepTotemModification", true);
-                        keepLatchModification = Config.Bind(prefix, "keepLatchModification", true);
-                        keepOverclockModification = Config.Bind(prefix, "keepOverclockModification", true);
-                        keepMergeModification = Config.Bind(prefix, "keepMergeModification", false);
-                        keepDuplicateModification = Config.Bind(prefix, "keepDuplicateModification", false);
+                        RandomizeSpecialAbility = config.Bind(prefix, "randomizeSpecialAbility", true);
+                        KeepTotemModification = config.Bind(prefix, "keepTotemModification", true);
+                        KeepLatchModification = config.Bind(prefix, "keepLatchModification", true);
+                        KeepOverclockModification = config.Bind(prefix, "keepOverclockModification", true);
+                        KeepMergeModification = config.Bind(prefix, "keepMergeModification", false);
+                        KeepDuplicateModification = config.Bind(prefix, "keepDuplicateModification", false);
                     }
                 }
 
-                public Modification modification;
+                public ModificationConfig Modification;
 
-                public void bind(ConfigFile Config)
+                public void Bind(ConfigFile config)
                 {
-                    string prefix = "Behaviour.Card";
+                    const string prefix = "Behaviour.Card";
 
-                    randomizeOpponentCard = Config.Bind(prefix, "randomizeOpponentCard", true);
-                    randomizePlayerCard = Config.Bind(prefix, "randomizePlayerCard", true);
-                    randomizeSquirrelCard = Config.Bind(prefix, "randomizeSquirrelCard", false);
-                    randomizeCorrectCost = Config.Bind(prefix, "randomizeCorrectCost", true);
-                    randomizeBoneCost = Config.Bind(prefix, "randomizeBoneCost", false);
-                    randomizeBloodCost = Config.Bind(prefix, "randomizeBloodCost", false);
-                    randomizeEnegryCost = Config.Bind(prefix, "randomizeEnegryCost", false);
+                    RandomizeOpponentCard = config.Bind(prefix, "randomizeOpponentCard", true);
+                    RandomizePlayerCard = config.Bind(prefix, "randomizePlayerCard", true);
+                    RandomizeSquirrelCard = config.Bind(prefix, "randomizeSquirrelCard", false);
+                    RandomizeCorrectCost = config.Bind(prefix, "randomizeCorrectCost", true);
+                    RandomizeBoneCost = config.Bind(prefix, "randomizeBoneCost", false);
+                    RandomizeBloodCost = config.Bind(prefix, "randomizeBloodCost", false);
+                    RandomizeEnergyCost = config.Bind(prefix, "randomizeEnergyCost", false);
 
-                    modification = new Modification();
-                    modification.bind(Config);
+                    Modification = new ModificationConfig();
+                    Modification.Bind(config);
                 }
             }
 
-            public Card card;
+            public CardConfig Card;
 
-            public void bind(ConfigFile Config)
+            public void Bind(ConfigFile config)
             {
-                string prefix = "Behaviour";
+                const string prefix = "Behaviour";
 
-                randomizeInActTwo = Config.Bind(prefix, "randomizeInActTwo", false);
+                RandomizeInActTwo = config.Bind(prefix, "randomizeInActTwo", false);
 
-                randomizeInActThree = Config.Bind(prefix, "randomizeInActThree", false);
+                RandomizeInActThree = config.Bind(prefix, "randomizeInActThree", false);
 
-                card = new Card();
-                card.bind(Config);
+                Card = new CardConfig();
+                Card.Bind(config);
             }
         }
 
-        public class Range
+        public class RangeConfig
         {
-            public class Card
+            public class CardConfig
             {
-                public ConfigEntry<int> minAttack;
+                public ConfigEntry<int> MinAttack;
 
-                public ConfigEntry<int> maxAttack;
+                public ConfigEntry<int> MaxAttack;
 
-                public ConfigEntry<int> minHealth;
+                public ConfigEntry<int> MinHealth;
 
-                public ConfigEntry<int> maxHealth;
+                public ConfigEntry<int> MaxHealth;
 
-                public ConfigEntry<int> minCost;
+                public ConfigEntry<int> MinCost;
 
-                public ConfigEntry<int> maxCost;
+                public ConfigEntry<int> MaxCost;
 
-                public class Modification
+                public class ModificationConfig
                 {
-                    public ConfigEntry<int> minBaseAbility;
+                    public ConfigEntry<int> MinBaseAbility;
 
-                    public ConfigEntry<int> maxBaseAbility;
+                    public ConfigEntry<int> MaxBaseAbility;
 
-                    public ConfigEntry<int> minCustomAbility;
+                    public ConfigEntry<int> MinCustomAbility;
 
-                    public ConfigEntry<int> maxCustomAbility;
+                    public ConfigEntry<int> MaxCustomAbility;
 
-                    public void bind(ConfigFile Config)
+                    public void Bind(ConfigFile config)
                     {
-                        string prefix = "Range.Card.Modification";
+                        const string prefix = "Range.Card.Modification";
 
-                        minBaseAbility = Config.Bind(prefix, "minBaseAbility", 0);
-                        maxBaseAbility = Config.Bind(prefix, "maxBaseAbility", 2);
-                        minCustomAbility = Config.Bind(prefix, "minCustomAbility", 0);
-                        maxCustomAbility = Config.Bind(prefix, "maxCustomAbility", 2);
+                        MinBaseAbility = config.Bind(prefix, "minBaseAbility", 0);
+                        MaxBaseAbility = config.Bind(prefix, "maxBaseAbility", 2);
+                        MinCustomAbility = config.Bind(prefix, "minCustomAbility", 0);
+                        MaxCustomAbility = config.Bind(prefix, "maxCustomAbility", 2);
                     }
                 }
 
-                public Modification modification;
+                public ModificationConfig Modification;
 
-                public void bind(ConfigFile Config)
+                public void Bind(ConfigFile config)
                 {
-                    string prefix = "Range.Card";
+                    const string prefix = "Range.Card";
 
-                    modification = new Modification();
+                    Modification = new ModificationConfig();
 
-                    minAttack = Config.Bind(prefix, "minAttack", 1);
-                    maxAttack = Config.Bind(prefix, "maxAttack", 9);
-                    minHealth = Config.Bind(prefix, "minHealth", 1);
-                    maxHealth = Config.Bind(prefix, "maxHealth", 9);
-                    minCost = Config.Bind(prefix, "minCost", 0);
-                    maxCost = Config.Bind(prefix, "maxCost", 5);
+                    MinAttack = config.Bind(prefix, "minAttack", 1);
+                    MaxAttack = config.Bind(prefix, "maxAttack", 9);
+                    MinHealth = config.Bind(prefix, "minHealth", 1);
+                    MaxHealth = config.Bind(prefix, "maxHealth", 9);
+                    MinCost = config.Bind(prefix, "minCost", 0);
+                    MaxCost = config.Bind(prefix, "maxCost", 5);
 
-                    modification.bind(Config);
+                    Modification.Bind(config);
                 }
             }
 
-            public Card card;
+            public CardConfig Card;
 
-            public void bind(ConfigFile Config)
+            public void Bind(ConfigFile config)
             {
-                card = new Card();
-                card.bind(Config);
+                Card = new CardConfig();
+                Card.Bind(config);
             }
         }
 
-        public Behaviour behaviour;
+        public BehaviourConfig Behaviour;
 
-        public Range range;
+        public RangeConfig Range;
 
-        public void bind(ConfigFile Config)
+        public void Bind(ConfigFile config)
         {
-            behaviour = new Behaviour();
-            behaviour.bind(Config);
-            range = new Range();
-            range.bind(Config);
+            Behaviour = new BehaviourConfig();
+            Behaviour.Bind(config);
+            Range = new RangeConfig();
+            Range.Bind(config);
         }
     }
 }

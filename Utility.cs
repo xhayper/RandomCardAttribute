@@ -2,82 +2,148 @@ using APIPlugin;
 using DiskCardGame;
 using System;
 using System.Collections.Generic;
+
 namespace RandomCardAttribute
 {
-    public class Utility
+    public static class Utility
     {
-        public static SpecialTriggeredAbility randomSpecialTriggeredAbility()
+        private static SpecialTriggeredAbility RandomSpecialTriggeredAbility()
         {
-            SpecialTriggeredAbility[] specialTriggeredAbilities = (SpecialTriggeredAbility[])Enum.GetValues(typeof(SpecialTriggeredAbility));
-            SpecialTriggeredAbility randSpecialTriggeredAbility = specialTriggeredAbilities[UnityEngine.Random.RandomRangeInt(0, specialTriggeredAbilities.Length - 1)];
-            if (randSpecialTriggeredAbility == SpecialTriggeredAbility.None) return randomSpecialTriggeredAbility();
-            return randSpecialTriggeredAbility;
-        }
-
-        public static Ability randomAbility()
-        {
-            List<Ability> abilityList = AbilitiesUtil.GetAbilities(true);
-            abilityList.AddRange(AbilitiesUtil.GetAbilities(false));
-            Ability randAbility = abilityList[UnityEngine.Random.RandomRangeInt(0, abilityList.Count - 1)];
-            if (randAbility == Ability.None || randAbility == Ability.NUM_ABILITIES) return randomAbility();
-            return randAbility;
-        }
-
-        public static List<Ability> randomAbilityList(int listSize = 3)
-        {
-            List<Ability> abilities = new List<Ability>();
-            for (int i = 0; i < listSize; i++)
+            while (true)
             {
-                Ability randAbility = randomAbility();
-                if (abilities.Contains(randAbility)) continue;
-                abilities.Add(randAbility);
+                var specialTriggeredAbilities =
+                    (SpecialTriggeredAbility[])Enum.GetValues(typeof(SpecialTriggeredAbility));
+                var randSpecialTriggeredAbility =
+                    specialTriggeredAbilities[
+                        UnityEngine.Random.RandomRangeInt(0, specialTriggeredAbilities.Length - 1)];
+                if (randSpecialTriggeredAbility is SpecialTriggeredAbility.None) continue;
+                return randSpecialTriggeredAbility;
             }
-            return abilities;
         }
 
-        public static CardInfo randomCardInfo(CardInfo cardInfo, bool isOpponent = false)
+        private static Ability RandomAbility()
         {
-
-            Plugin.Log.LogDebug($"Randomizing card: {cardInfo.name}");
-            if (!Plugin.configuration.behaviour.card.randomizeSquirrelCard.Value && cardInfo.name == "Squirrel") return cardInfo;
-            int costType = UnityEngine.Random.RandomRangeInt(0, 2);
-            CustomCard customCard = new CustomCard(cardInfo.name)
+            while (true)
             {
-                baseAttack = UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minAttack.Value, Plugin.configuration.range.card.maxAttack.Value),
-                baseHealth = UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minHealth.Value, Plugin.configuration.range.card.maxHealth.Value),
-                cost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 0 && (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2)) || Plugin.configuration.behaviour.card.randomizeBloodCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.BloodCost,
-                bonesCost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 1 && (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2)) || Plugin.configuration.behaviour.card.randomizeBoneCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.BonesCost,
-                energyCost = (Plugin.configuration.behaviour.card.randomizeCorrectCost.Value && costType == 2 && (SaveManager.SaveFile.IsPart2 || SaveManager.SaveFile.IsPart3)) || Plugin.configuration.behaviour.card.randomizeEnegryCost.Value ? UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.minCost.Value, Plugin.configuration.range.card.maxCost.Value) : cardInfo.EnergyCost,
+                var abilityList = AbilitiesUtil.GetAbilities(true);
+                abilityList.AddRange(AbilitiesUtil.GetAbilities(false));
+                var randAbility = abilityList[UnityEngine.Random.RandomRangeInt(0, abilityList.Count - 1)];
+                if (randAbility is Ability.None or Ability.NUM_ABILITIES) continue;
+                return randAbility;
+            }
+        }
+
+        public static CardInfo RandomCardInfo(CardInfo cardInfo, bool isOpponent = false)
+        {
+            Plugin.Log.LogDebug($"Randomizing card: {cardInfo.name}");
+            if (!Plugin.Configuration.Behaviour.Card.RandomizeSquirrelCard.Value && cardInfo.name == "Squirrel")
+                return cardInfo;
+            var costType = UnityEngine.Random.RandomRangeInt(0, 2);
+            var customCard = new CustomCard(cardInfo.name)
+            {
+                baseAttack = UnityEngine.Random.RandomRangeInt(Plugin.Configuration.Range.Card.MinAttack.Value,
+                    Plugin.Configuration.Range.Card.MaxAttack.Value),
+                baseHealth = UnityEngine.Random.RandomRangeInt(Plugin.Configuration.Range.Card.MinHealth.Value,
+                    Plugin.Configuration.Range.Card.MaxHealth.Value),
+                cost =
+                    Plugin.Configuration.Behaviour.Card.RandomizeCorrectCost.Value && costType == 0 &&
+                    (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2) ||
+                    Plugin.Configuration.Behaviour.Card.RandomizeBloodCost.Value
+                        ? UnityEngine.Random.RandomRangeInt(Plugin.Configuration.Range.Card.MinCost.Value,
+                            Plugin.Configuration.Range.Card.MaxCost.Value)
+                        : cardInfo.BloodCost,
+                bonesCost =
+                    Plugin.Configuration.Behaviour.Card.RandomizeCorrectCost.Value && costType == 1 &&
+                    (SaveManager.SaveFile.IsPart1 || SaveManager.SaveFile.IsPart2) ||
+                    Plugin.Configuration.Behaviour.Card.RandomizeBoneCost.Value
+                        ? UnityEngine.Random.RandomRangeInt(Plugin.Configuration.Range.Card.MinCost.Value,
+                            Plugin.Configuration.Range.Card.MaxCost.Value)
+                        : cardInfo.BonesCost,
+                energyCost =
+                    Plugin.Configuration.Behaviour.Card.RandomizeCorrectCost.Value && costType == 2 &&
+                    (SaveManager.SaveFile.IsPart2 || SaveManager.SaveFile.IsPart3) ||
+                    Plugin.Configuration.Behaviour.Card.RandomizeEnergyCost.Value
+                        ? UnityEngine.Random.RandomRangeInt(Plugin.Configuration.Range.Card.MinCost.Value,
+                            Plugin.Configuration.Range.Card.MaxCost.Value)
+                        : cardInfo.EnergyCost,
             };
-            if (Plugin.configuration.behaviour.card.modification.randomizeSpecialAbility.Value && UnityEngine.Random.RandomRangeInt(0, 1) == 1) customCard.specialAbilities = new List<SpecialTriggeredAbility>() { randomSpecialTriggeredAbility() };
-            CardInfo newCardInfo = customCard.AdjustCard(cardInfo);
-            List<CardModificationInfo> cardModificationInfoList = new List<CardModificationInfo>();
+            if (Plugin.Configuration.Behaviour.Card.Modification.RandomizeSpecialAbility.Value &&
+                UnityEngine.Random.RandomRangeInt(0, 1) == 1)
+                customCard.specialAbilities = new List<SpecialTriggeredAbility> { RandomSpecialTriggeredAbility() };
+            var newCardInfo = customCard.AdjustCard(cardInfo);
+            var cardModificationInfoList = new List<CardModificationInfo>();
+            var nameReplacementList = new List<string>();
+            var deathCardInfoList = new List<DeathCardInfo>();
+            var bountyHunterInfoList = new List<BountyHunterInfo>();
             cardInfo.Mods.ForEach(cardModificationInfo =>
             {
-                if (Plugin.configuration.behaviour.card.modification.keepDuplicateModification.Value && cardModificationInfo.fromDuplicateMerge) cardModificationInfoList.Add(cardModificationInfo);
-                else if (Plugin.configuration.behaviour.card.modification.keepLatchModification.Value && cardModificationInfo.fromLatch) cardModificationInfoList.Add(cardModificationInfo);
-                else if (Plugin.configuration.behaviour.card.modification.keepMergeModification.Value && cardModificationInfo.fromCardMerge) cardModificationInfoList.Add(cardModificationInfo);
-                else if (Plugin.configuration.behaviour.card.modification.keepOverclockModification.Value && cardModificationInfo.fromOverclock) cardModificationInfoList.Add(cardModificationInfo);
-                else if (Plugin.configuration.behaviour.card.modification.keepTotemModification.Value && cardModificationInfo.fromTotem) cardModificationInfoList.Add(cardModificationInfo);
+                bountyHunterInfoList.Add(cardModificationInfo.bountyHunterInfo);
+                deathCardInfoList.Add(cardModificationInfo.deathCardInfo);
+                nameReplacementList.Add(cardModificationInfo.nameReplacement);
+                if (Plugin.Configuration.Behaviour.Card.Modification.KeepDuplicateModification.Value &&
+                    cardModificationInfo.fromDuplicateMerge) cardModificationInfoList.Add(cardModificationInfo);
+                else if (Plugin.Configuration.Behaviour.Card.Modification.KeepLatchModification.Value &&
+                         cardModificationInfo.fromLatch) cardModificationInfoList.Add(cardModificationInfo);
+                else if (Plugin.Configuration.Behaviour.Card.Modification.KeepMergeModification.Value &&
+                         cardModificationInfo.fromCardMerge) cardModificationInfoList.Add(cardModificationInfo);
+                else if (Plugin.Configuration.Behaviour.Card.Modification.KeepOverclockModification.Value &&
+                         cardModificationInfo.fromOverclock) cardModificationInfoList.Add(cardModificationInfo);
+                else if (Plugin.Configuration.Behaviour.Card.Modification.KeepTotemModification.Value &&
+                         cardModificationInfo.fromTotem) cardModificationInfoList.Add(cardModificationInfo);
             });
-            for (int i = 0; i < UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.modification.minBaseAbility.Value, Plugin.configuration.range.card.modification.maxBaseAbility.Value + 1); i++)
+            for (var i = 0;
+                 i < UnityEngine.Random.RandomRangeInt(
+                     Plugin.Configuration.Range.Card.Modification.MinBaseAbility.Value,
+                     Plugin.Configuration.Range.Card.Modification.MaxBaseAbility.Value + 1);
+                 i++)
             {
-                cardModificationInfoList.Add(new CardModificationInfo()
-                {
-                    abilities = { Utility.randomAbility() },
-                });
+                var item = new CardModificationInfo();
+                item.abilities.Add(RandomAbility());
+                cardModificationInfoList.Add(item);
             }
+
             if (!isOpponent && SaveManager.SaveFile.IsPart1)
             {
-                for (int i = 0; i < UnityEngine.Random.RandomRangeInt(Plugin.configuration.range.card.modification.minCustomAbility.Value, Plugin.configuration.range.card.modification.maxCustomAbility.Value + 1); i++)
+                for (var i = 0;
+                     i < UnityEngine.Random.RandomRangeInt(
+                         Plugin.Configuration.Range.Card.Modification.MinCustomAbility.Value,
+                         Plugin.Configuration.Range.Card.Modification.MaxCustomAbility.Value + 1);
+                     i++)
                 {
-                    cardModificationInfoList.Add(new CardModificationInfo()
-                    {
-                        abilities = { Utility.randomAbility() },
-                        fromCardMerge = true
-                    });
+                    var item = new CardModificationInfo();
+                    item.abilities.Add(RandomAbility());
+                    item.fromCardMerge = true;
+                    cardModificationInfoList.Add(item);
                 }
             }
+
+            nameReplacementList.ForEach(nameReplacement =>
+            {
+                var item = new CardModificationInfo
+                {
+                    nameReplacement = nameReplacement
+                };
+                cardModificationInfoList.Add(item);
+            });
+
+            deathCardInfoList.ForEach(deathCardInfo =>
+            {
+                var item = new CardModificationInfo
+                {
+                    deathCardInfo = deathCardInfo
+                };
+                cardModificationInfoList.Add(item);
+            });
+
+            bountyHunterInfoList.ForEach(bountyHunterInfo =>
+            {
+                var item = new CardModificationInfo
+                {
+                    bountyHunterInfo = bountyHunterInfo
+                };
+                cardModificationInfoList.Add(item);
+            });
+
             newCardInfo.Mods = cardModificationInfoList;
             return newCardInfo;
         }
