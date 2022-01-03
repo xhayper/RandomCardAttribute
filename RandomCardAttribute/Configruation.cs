@@ -6,6 +6,8 @@ namespace RandomCardAttribute
     {
         public class BehaviourConfig
         {
+            public ConfigEntry<bool> UseCorrectAbilityPool;
+
             public ConfigEntry<bool> RandomizeInActTwo;
 
             public ConfigEntry<bool> RandomizeInActThree;
@@ -58,7 +60,7 @@ namespace RandomCardAttribute
                 public void Bind(ConfigFile config)
                 {
                     const string prefix = "Behaviour.Card";
-
+                    
                     RandomizeOpponentCard = config.Bind(prefix, "randomizeOpponentCard", true);
                     RandomizePlayerCard = config.Bind(prefix, "randomizePlayerCard", true);
                     RandomizeSquirrelCard = config.Bind(prefix, "randomizeSquirrelCard", false);
@@ -78,8 +80,8 @@ namespace RandomCardAttribute
             {
                 const string prefix = "Behaviour";
 
+                UseCorrectAbilityPool = config.Bind(prefix, "useCorrectAbilityPool", true);
                 RandomizeInActTwo = config.Bind(prefix, "randomizeInActTwo", false);
-
                 RandomizeInActThree = config.Bind(prefix, "randomizeInActThree", false);
 
                 Card = new CardConfig();

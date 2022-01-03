@@ -1,0 +1,10 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Copy Output to Plugins" type="RunNativeExe" factoryName="Native Executable">
+    <option name="EXE_PATH" value="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" />
+    <option name="PROGRAM_PARAMETERS" value="New-Item -Force -ItemType directory -Path .cache/Inscryption/BepInEx/plugins | Out-Null; Move-Item -Force -Path .output\*.dll -Destination .cache\Inscryption\BepInEx\plugins" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <method v="2" />
+  </configuration>
+</component>

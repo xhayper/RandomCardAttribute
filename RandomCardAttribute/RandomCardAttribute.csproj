@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>RandomCardAttribute</AssemblyName>
     <Description>Randomize every card's attribute when battle start</Description>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
@@ -14,21 +14,16 @@
     <PackageReference Include="BepInEx.Core" Version="5.4.17" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
     <PackageReference Include="UnityEngine.Modules" Version="2019.4.24" IncludeAssets="compile" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+    <!-- If you want to use this, Commnent the "ItemGroup" line. -->
+    <!-- PackageReference Include="Inscryption.GameLibs" Version="1.2.0-r.1" /-->
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="CardLoader">
-      <HintPath>lib\API.dll</HintPath>
+    <Reference Include="Assembly-CSharp" Private="false">
+      <HintPath>..\.cache\Assembly-CSharp-nstrip.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>lib\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization">
-      <HintPath>lib\Sirenix.Serialization.dll</HintPath>
+    <Reference Include="Sirenix.Serialization" Private="false">
+      <HintPath>..\.cache\Inscryption\Inscryption_Data\Managed\Sirenix.Serialization.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

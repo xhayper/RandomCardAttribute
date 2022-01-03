@@ -1,7 +1,7 @@
 @echo off
-dotnet build
+dotnet build RandomCardAttribute --output .output/
 RMDIR /s /q production >nul 2>&1
-XCOPY bin\Debug\netstandard2.0\RandomCardAttribute.dll production\ /v /y >nul
+XCOPY .output\RandomCardAttribute.dll production\ /v /y >nul
 XCOPY manifest.json production\ /v /y >nul
 XCOPY icon.png production\ /v /y >nul
 XCOPY README.md production\ /v /y >nul

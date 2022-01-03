@@ -1,5 +1,8 @@
+RandomCardAttribute/obj/
+RandomCardAttribute/bin/
+SteamPatch/obj/
+SteamPatch/bin/
 production/
-vscode/
+.output/
+.cache/
 .idea/
-obj/
-bin/
