@@ -2,6 +2,9 @@
 
 A mod for Inscryption where it randomize your card's attribute on battle.
 
+## Note
+- Act 2 and Act 3 randomization is disabled by default, Enable it in config file.
+
 ## Installation (game, automated)
 
 This is the recommended way to install this plugin on the game.
@@ -28,10 +31,9 @@ You can configurate the behaviour of this mod by doing the following
 
 ## TODO
 
-|                   Task                    | Status |                        Note                         |
-| :---------------------------------------: | :----: | :-------------------------------------------------: |
-| Test if ability work with Act 2 and Act 3 |  SOON  | Need someone to send over Act 2 and Act 3 save file |
-|        More detailed configuration        |  SOON  |                                                     |
+|            Task             | Status | Note |
+|:---------------------------:|:------:|:----:|
+| More detailed configuration |  SOON  |      |
 
 ## Changelog
 

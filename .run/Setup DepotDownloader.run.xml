@@ -1,0 +1,10 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Setup DepotDownloader" type="RunNativeExe" factoryName="Native Executable">
+    <option name="EXE_PATH" value="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" />
+    <option name="PROGRAM_PARAMETERS" value="New-Item -Force -ItemType directory -Path .cache/DepotDownloader | Out-Null; curl https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.4.5/depotdownloader-2.4.5.zip -o .cache/depotdownloader-2.4.5.zip; tar -xf .cache/depotdownloader-2.4.5.zip -C .cache/DepotDownloader; Remove-Item .cache/depotdownloader-2.4.5.zip" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <method v="2" />
+  </configuration>
+</component>

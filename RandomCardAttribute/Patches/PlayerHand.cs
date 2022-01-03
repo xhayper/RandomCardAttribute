@@ -2,6 +2,8 @@ using DiskCardGame;
 using HarmonyLib;
 using UnityEngine;
 
+#pragma warning disable Publicizer001
+
 namespace RandomCardAttribute.Patches
 {
     [HarmonyPatch(typeof(PlayerHand), "AddCardToHand")]
@@ -17,12 +19,12 @@ namespace RandomCardAttribute.Patches
             if (!Plugin.Configuration.Behaviour.Card.RandomizePlayerCard.Value) return;
             var playableCard = __0;
             if (!Plugin.Configuration.Behaviour.Card.RandomizeSquirrelCard.Value && __0.Info.name == "Squirrel") return;
-            playableCard.Info.Abilities.ForEach(ability =>
-            {
-                playableCard.TriggerHandler.RemoveAbility(ability);
-            });
+            Plugin.Log.LogDebug("Randomizing Player's Card");
+            playableCard.TriggerHandler.specialAbilities.Clear();
+            playableCard.TriggerHandler.triggeredAbilities.Clear();
+            playableCard.TriggerHandler.permanentlyAttachedBehaviours.Clear();
             playableCard.TemporaryMods.Clear();
-            playableCard.Info = Utility.RandomCardInfo(playableCard.Info);
+            playableCard.SetInfo(Utility.RandomCardInfo(playableCard.Info));
             playableCard.Info.Abilities.ForEach(ability =>
             {
                 playableCard.TriggerHandler.AddAbility(ability);

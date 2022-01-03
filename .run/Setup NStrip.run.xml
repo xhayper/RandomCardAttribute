@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Setup NStrip" type="RunNativeExe" factoryName="Native Executable">
+    <option name="EXE_PATH" value="C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" />
+    <option name="PROGRAM_PARAMETERS" value="curl https://github.com/BepInEx/NStrip/releases/download/v1.3/NStrip.exe -o .cache/NStrip.exe; .cache/NStrip.exe -n -p --keep-resources .cache/Inscryption/Inscryption_Data/Managed/Assembly-CSharp.dll .cache/Assembly-CSharp-nstrip.dll" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PASS_PARENT_ENVS" value="1" />
+    <option name="USE_EXTERNAL_CONSOLE" value="0" />
+    <method v="2" />
+  </configuration>
+</component>
