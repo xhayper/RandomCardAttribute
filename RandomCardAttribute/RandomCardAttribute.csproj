@@ -14,16 +14,9 @@
     <PackageReference Include="BepInEx.Core" Version="5.4.17" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
     <PackageReference Include="UnityEngine.Modules" Version="2019.4.24" IncludeAssets="compile" />
-    <!-- If you want to use this, Commnent the "ItemGroup" line. -->
-    <!-- PackageReference Include="Inscryption.GameLibs" Version="1.2.0-r.1" /-->
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Assembly-CSharp" Private="false">
-      <HintPath>..\.cache\Assembly-CSharp-nstrip.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization" Private="false">
-      <HintPath>..\.cache\Inscryption\Inscryption_Data\Managed\Sirenix.Serialization.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Inscryption.GameLibs" Version="0.30.0-r.0" />
   </ItemGroup>
 </Project>
