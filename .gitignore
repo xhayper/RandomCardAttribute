@@ -1,8 +1,7 @@
 RandomCardAttribute/obj/
 RandomCardAttribute/bin/
-SteamPatch/obj/
-SteamPatch/bin/
 production/
 .output/
 .cache/
 .idea/
+lib/
