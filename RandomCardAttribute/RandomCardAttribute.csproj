@@ -23,4 +23,5 @@
 	<ItemGroup>
 		<PackageReference Include="Inscryption.GameLibs" Version="0.30.0-r.0" />
 	</ItemGroup>
+	
 </Project>
