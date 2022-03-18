@@ -1,18 +1,12 @@
-using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-
-#pragma warning disable 169
+using BepInEx;
 
 namespace RandomCardAttribute
 {
-    [BepInPlugin(PluginGuid, PluginName, PluginVersion)]
+    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-        private const string PluginGuid = "io.github.xhayper.randomcardattribute";
-        private const string PluginName = "RandomCardAttribute";
-        private const string PluginVersion = "1.2.0.0";
-
         internal static ManualLogSource Log;
 
         internal static Configuration Configuration;
@@ -23,8 +17,7 @@ namespace RandomCardAttribute
             Log.LogInfo($"Oh boy, You made a huge mistake.");
             Configuration = new Configuration();
             Configuration.Bind(Config);
-            var harmony = new Harmony(PluginGuid);
-            harmony.PatchAll();
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), PluginInfo.PLUGIN_GUID);
         }
     }
 }
