@@ -1,8 +1,6 @@
 using DiskCardGame;
-using HarmonyLib;
 using UnityEngine;
-
-#pragma warning disable Publicizer001
+using HarmonyLib;
 
 namespace RandomCardAttribute.Patches
 {
