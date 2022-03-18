@@ -1,7 +1,8 @@
-RandomCardAttribute/obj/
-RandomCardAttribute/bin/
-production/
 .output/
 .cache/
 .idea/
+
+production/
 lib/
+obj/
+bin/
