@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>RandomCardAttribute</AssemblyName>
 		<Description>Randomize every card's attribute when battle start</Description>
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
@@ -22,12 +22,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Inscryption.GameLibs" Version="0.30.0-r.0" />
-		<!-- If you have a local assembly of Inscryption, You can use this instead of the above-->
-		<!--
-		<Reference Include="Assembly-CSharp" Private="false">
-			<HintPath>lib/Assembly-CSharp.dll</HintPath>
-		</Reference> 
-		-->
 	</ItemGroup>
 
 </Project>
