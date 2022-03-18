@@ -1,9 +1,7 @@
 {
     "name": "RandomCardAttribute",
     "description": "A mod for Inscriyption where it randomize your card's attribute on battle.",
-    "version_number": "1.2.0",
+    "version_number": "1.2.1",
     "website_url": "https://github.com/xhayper/RandomCardAttribute",
-    "dependencies": [
-        "BepInEx-BepInExPack_Inscryption-5.4.1701"
-    ]
+    "dependencies": []
 }
