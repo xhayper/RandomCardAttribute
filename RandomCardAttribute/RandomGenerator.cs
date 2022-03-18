@@ -1,5 +1,5 @@
-﻿using System;
 using System.Security.Cryptography;
+using System;
 
 // https://stackoverflow.com/questions/42426420/how-to-generate-a-cryptographically-secure-random-integer-within-a-range - StackOverFlow to the recuse.
 
