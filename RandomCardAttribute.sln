@@ -1,5 +1,3 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{CF78C76D-0C64-41FD-B935-144D345FC7E5}") = "RandomCardAttribute", "RandomCardAttribute\RandomCardAttribute.csproj", "{BCF5FDE2-AED1-44F0-AF6D-8AAECA52382B}"
 EndProject
-Project("{D03A63EC-22A4-4C86-BF1E-F55078129563}") = "SteamPatch", "SteamPatch\SteamPatch.csproj", "{11EFD118-C316-459F-ACDF-3767B996D7F1}"
-EndProject
