@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DiskCardGame;
+using System.Linq;
 using System;
 
 namespace RandomCardAttribute
@@ -7,7 +8,7 @@ namespace RandomCardAttribute
     public static class Utility
     {
         private static readonly RandomGenerator RandomGenerator = new();
-        
+
         private static Array GetCorrectMetaCategories()
         {
             if (!Plugin.Configuration.Behaviour.UseCorrectAbilityPool.Value) return Enum.GetValues(typeof(AbilityMetaCategory));
@@ -16,24 +17,15 @@ namespace RandomCardAttribute
             if (SaveManager.SaveFile.IsPart3) return new[] { AbilityMetaCategory.BountyHunter, AbilityMetaCategory.Part3Modular, AbilityMetaCategory.Part3Rulebook, AbilityMetaCategory.Part3BuildACard };
             if (SaveManager.SaveFile.IsGrimora) return new[] { AbilityMetaCategory.GrimoraRulebook };
             if (SaveManager.SaveFile.IsMagnificus) return new[] { AbilityMetaCategory.MagnificusRulebook };
-            
-            return new[] {AbilityMetaCategory.Part1Modular, AbilityMetaCategory.Part1Rulebook} ;
+
+            return new[] { AbilityMetaCategory.Part1Modular, AbilityMetaCategory.Part1Rulebook };
         }
-        
+
         private static List<Ability> GetAllAbilities(bool isOpponent = false)
         {
-            var abilityList = new List<Ability>();
-            foreach (AbilityMetaCategory category in GetCorrectMetaCategories())
-            {
-                // Have to do it like this because API plugin override .GetAbilities
-                if (!isOpponent) abilityList.AddRange(AbilitiesUtil.GetAbilities(false, false, int.MinValue, int.MaxValue, category));
-                abilityList.AddRange(AbilitiesUtil.GetAbilities(false, true, int.MinValue, int.MaxValue, category));
-                if (!isOpponent) abilityList.AddRange(AbilitiesUtil.GetAbilities(true, false, int.MinValue, int.MaxValue, category));
-                abilityList.AddRange(AbilitiesUtil.GetAbilities(false, true, int.MinValue, int.MaxValue, category));
-            }
-            return abilityList;
+            return ScriptableObjectLoader<AbilityInfo>.AllData.Select(abilitytInfo => abilitytInfo.ability).ToList();
         }
-        
+
         private static SpecialTriggeredAbility RandomSpecialTriggeredAbility()
         {
             while (true)
@@ -64,7 +56,7 @@ namespace RandomCardAttribute
             if (!Plugin.Configuration.Behaviour.Card.RandomizeSquirrelCard.Value && cardInfo.name == "Squirrel")
                 return cardInfo;
             Plugin.Log.LogDebug($"Randomizing card: {cardInfo.name}");
-            var newCardInfo = (CardInfo) cardInfo.Clone();
+            var newCardInfo = (CardInfo)cardInfo.Clone();
             var costType = SaveManager.SaveFile.IsPart2 || !Plugin.Configuration.Behaviour.Card.RandomizeCorrectCost.Value ? RandomGenerator.Next(0, 2) :
                 SaveManager.SaveFile.IsPart1 ? RandomGenerator.Next(0, 1) : 2;
             newCardInfo.baseAttack = RandomGenerator.Next(Plugin.Configuration.Range.Card.MinAttack.Value,
