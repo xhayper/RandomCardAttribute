@@ -1,8 +1,6 @@
+using System.Collections.Generic;
 using DiskCardGame;
 using System;
-using System.Collections.Generic;
-
-#pragma warning disable Publicizer001
 
 namespace RandomCardAttribute
 {
